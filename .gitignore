@@ -28,3 +28,11 @@ phpunit.phar
 
 tests/_output/*
 tests/_support/_generated
+
+# Yii2 Framework
+assets/*
+!assets/.gitignore
+protected/runtime/*
+!protected/runtime/.gitignore
+protected/data/*.db
+themes/classic/views/
