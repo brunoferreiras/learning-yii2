@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Person;
 use app\models\RegisterModel;
+use yii\data\Pagination;
 use yii\web\Controller;
 
 class ExerciseController extends Controller
@@ -17,5 +19,21 @@ class ExerciseController extends Controller
         }
 
         return $this->render('form', compact('registerModel'));
+    }
+
+    public function actionPeople()
+    {
+        $query = Person::find();
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 3,
+            'totalCount' => $query->count()
+        ]);
+
+        $people = $query->orderBy('name')
+                        ->offset($pagination->offset)
+                        ->limit($pagination->limit)
+                        ->all();
+        return $this->render('people', compact('people', 'pagination'));
     }
 }
